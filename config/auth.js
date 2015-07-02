@@ -6,7 +6,7 @@ module.exports = {
     'facebookAuth' : {
         'clientID'        : '355143334507436', // your App ID
         'clientSecret'    : 'b589bf974c044f16e633ca665acaa1ea', // your App Secret
-        'callbackURL'     : 'http://localhost:8080/auth/facebook/callback'
+        'callbackURL'     : 'http://ec2-52-27-39-13.us-west-2.compute.amazonaws.com:8080/auth/facebook/callback'
     },
 
     'twitterAuth' : {
@@ -18,7 +18,7 @@ module.exports = {
     'googleAuth' : {
         'clientID'         : '9141745574-28o54bt7nrdeu44db424o6c1uaqstnjv.apps.googleusercontent.com',
         'clientSecret'     : 'rQRMQzgOi7mgod1qdREvVupS',
-        'callbackURL'      : 'http://localhost:8080/auth/google/callback'
+        'callbackURL'      : 'http://ec2-52-27-39-13.us-west-2.compute.amazonaws.com:8080/auth/google/callback'
     }
 
 };
