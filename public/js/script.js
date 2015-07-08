@@ -7,144 +7,257 @@ $( document ).on( "click", ".del", function( event )
 		$(this).parent().parent().remove();
 	});
 	
-    $("#LoadButton").click(function(){
+    $("#LoadButton").click(function()
+    {
     	//alert($("#selectedRecipeXmlId option:selected" ).val());
     	$id=$("#selectedRecipeXmlId option:selected" ).val()
     	
-        $.post("/RESTWSRecipeGeneration?id="+$id,function(data){
+        $.post("/RESTWSRecipeGeneration?id="+$id,function(data)
+        {
         
-  		$('#content').val($("#selectedRecipeXmlId option:selected" ).val());
+	  		$('#content').val($("#selectedRecipeXmlId option:selected" ).val());
+	  		
+	  		  		   		
+	  		var jsonString = JSON.stringify(data);
+	  		
+	  		//$("#tableId > tbody > tr").remove();
+	  		$('#tableId').dataTable().fnClearTable();
+	   		for(i=0; i<data.length;i++)
+	  		{
+		  		var v= i+1; 		  		  		
+	//  		$('#tableBodyID').append('<tr class="row1"><td align="center">'+v+'</td><td align="center">'+data[i].STEP_DETAILS+'</td>'+
+	//  			'<td align="center"><input class="frontend" type="checkbox" /></td>'+
+	//  			'<td align="center"><input class="backend" type="checkbox"  STYLE="background-color:"#C5EFF7"/></td>'+
+	//  			'<td align="center"><input class="nocomplain" type="checkbox" /></td>'+
+	//  			'<td align="center"><input class="audioalert" type="checkbox" STYLE="background-color:"#C5EFF7"/></td>'+
+	//  			'<td align="center"><input class="battery" type="checkbox" /></td>'+
+	//  			'<td align="center"><input class="bluetooth" type="checkbox" /></td>'+
+	//  			'<td align="center"><input class="camera" type="checkbox" /></td>'+
+	//  			'<td align="center"><input class="charging" type="checkbox" /></td>'+
+	//  			'<td align="center"><input class="displaykeyboard" type="checkbox" /></td>'+
+	//  			'<td align="center"><input class="memorycard" type="checkbox" /></td>'+
+	//  			'<td align="center"><input class="poweronoff" type="checkbox" /></td>'+
+	//  			'<td align="center"><input class="simcard" type="checkbox" /></td>'+
+	//  			'<td align="center"><input class="wifi" type="checkbox" /></td>'+
+	//  			'<td align="center"><input type="button" name="delete" value="delete" class="del deleteRecipe"><strong> </strong></td>'+
+	//  			'</tr>')
+	  		
+  				$tableRows = '<tr class="row1"><td align="center">'+v+'</td><td align="center">'+data[i].STEP_DETAILS+'</td>'+
+	  			'<td align="center"><input class="frontend" type="checkbox"'; 
+  				
+  				if(data[i].FRONTEND=="true")
+				{
+  					$tableRows = $tableRows + ' checked ';
+				}
+  				
+  				$tableRows = $tableRows + ' /></td>'+
+	  			'<td align="center"><input class="backend" type="checkbox" STYLE="background-color:"#C5EFF7" '; 
+  				
+  				if(data[i].BACKEND=="true")
+				{
+  					$tableRows = $tableRows + ' checked ';
+				}
+  				
+  				$tableRows = $tableRows + '/></td>'+
+	  			'<td align="center"><input class="nocomplain" type="checkbox"'; 
+  				
+  				if(data[i].NO_COMPLAINT=="true")
+				{
+  					$tableRows = $tableRows + ' checked ';
+				}
+  				
+  				$tableRows = $tableRows + '/></td>'+
+	  			'<td align="center"><input class="audioalert" type="checkbox" STYLE="background-color:"#C5EFF7" ';
+  				
+  				if(data[i].AUDIO_ALERT=="true")
+				{
+  					$tableRows = $tableRows + ' checked ';
+				}
+  				
+  				$tableRows = $tableRows + '/></td>'+
+	  			'<td align="center"><input class="battery" type="checkbox"  ';
+  				
+  				if(data[i].BATTERY=="true")
+				{
+  					$tableRows = $tableRows + ' checked ';
+				}
+  				
+  				$tableRows = $tableRows + '/></td>'+
+	  			'<td align="center"><input class="bluetooth" type="checkbox"  ';
+  				
+  				if(data[i].BLUETOOTH=="true")
+				{
+  					$tableRows = $tableRows + ' checked ';
+				}
+  				
+  				$tableRows = $tableRows + '/></td>'+
+	  			'<td align="center"><input class="camera" type="checkbox"  ';
+  				
+  				if(data[i].CAMERA=="true")
+				{
+  					$tableRows = $tableRows + ' checked ';
+				}
+  				
+  				$tableRows = $tableRows + '/></td>'+
+	  			'<td align="center"><input class="charging" type="checkbox"  ';
+  				
+  				if(data[i].CHARGING=="true")
+				{
+  					$tableRows = $tableRows + ' checked ';
+				}
+  				
+  				$tableRows = $tableRows + '/></td>'+
+	  			'<td align="center"><input class="displaykeyboard" type="checkbox" '; 
+  				
+  				if(data[i].DISPLAY_KEYBORED=="true")
+				{
+  					$tableRows = $tableRows + ' checked ';
+				}
+  				
+  				$tableRows = $tableRows + '/></td>'+
+	  			'<td align="center"><input class="memorycard" type="checkbox"  ';
+  				
+  				if(data[i].MEMORY_CARD=="true")
+				{
+  					$tableRows = $tableRows + ' checked ';
+				}
+  				
+  				$tableRows = $tableRows + '/></td>'+
+	  			'<td align="center"><input class="poweronoff" type="checkbox"  ';
+  				
+  				if(data[i].POWER_ON_OFF=="true")
+				{
+  					$tableRows = $tableRows + ' checked ';
+				}
+  				
+  				$tableRows = $tableRows + '/></td>'+
+	  			'<td align="center"><input class="simcard" type="checkbox"  ';
+  				
+  				if(data[i].SIM_CARD=="true")
+				{
+  					$tableRows = $tableRows + ' checked ';
+				}
+  				
+  				$tableRows = $tableRows + '/></td>'+
+	  			'<td align="center"><input class="wifi" type="checkbox"  ';
+  				
+  				if(data[i].WIFI=="true")
+				{
+  					$tableRows = $tableRows + ' checked ';
+				}
+  				
+  				$tableRows = $tableRows + '/></td>'+
+	  			'<td align="center"><input type="button" name="delete" value="delete" class="del deleteRecipe"><strong> </strong></td>'+
+	  			'</tr>';
+	  			
+	  			$('#tableBodyID').append($tableRows);
+	  			
+	  		} 
   		
-  		  		   		
-  		var jsonString = JSON.stringify(data);
-  		
-  		//$("#tableId > tbody > tr").remove();
-  		$('#tableId').dataTable().fnClearTable();
-   		for(i=0; i<data.length;i++)
-  		{
-  		  		  		  		
-  		$('#tableBodyID').append('<tr class="row1"><td align="center">'+i+'</td><td align="center">'+data[i].STEP_DETAILS+'</td>'+
-  			'<td align="center"><input class="frontend" type="checkbox" /></td>'+
-  			'<td align="center"><input class="backend" type="checkbox"  STYLE="background-color:"#C5EFF7"/></td>'+
-  			'<td align="center"><input class="nocomplain" type="checkbox" /></td>'+
-  			'<td align="center"><input class="audioalert" type="checkbox" STYLE="background-color:"#C5EFF7"/></td>'+
-  			'<td align="center"><input class="battery" type="checkbox" /></td>'+
-  			'<td align="center"><input class="bluetooth" type="checkbox" /></td>'+
-  			'<td align="center"><input class="camera" type="checkbox" /></td>'+
-  			'<td align="center"><input class="charging" type="checkbox" /></td>'+
-  			'<td align="center"><input class="displaykeyboard" type="checkbox" /></td>'+
-  			'<td align="center"><input class="memorycard" type="checkbox" /></td>'+
-  			'<td align="center"><input class="poweronoff" type="checkbox" /></td>'+
-  			'<td align="center"><input class="simcard" type="checkbox" /></td>'+
-  			'<td align="center"><input class="wifi" type="checkbox" /></td>'+
-  			'<td align="center"><input type="hidden" name="delete" value="delete" class="del deleteRecipe"><span class="glyphicon glyphicon-trash"><strong> </strong></td>'+
-  			'</tr>')
- 		
-  		} 
-  		
-  	//	for(i=0; i<data.length;i++)
-  	//	{
-  		var i=0;
-  			$('#tableId > tbody  > tr').each(function()
-  			{
-  			$td=0
-  			$(this).find('td').each (function() {
-  			
-  			if($td==2)
-  			{
-  							if(data[i].FRONTEND=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==3)
-  			{
-  							if(data[i].BACKEND=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==4)
-  			{
-  							if(data[i].NO_COMPLAINT=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==5)
-  			{
-  							if(data[i].AUDIO_ALERT=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==6)
-  			{
-  							if(data[i].BATTERY=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==8)
-  			{
-  							if(data[i].CAMERA=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==7)
-  			{
-  							if(data[i].BLUETOOTH=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==9)
-  			{
-  							if(data[i].CHARGING=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==10)
-  			{
-  							if(data[i].DISPLAY_KEYBORED=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==11)
-  			{
-  							if(data[i].MEMORY_CARD=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==12)
-  			{
-  							if(data[i].POWER_ON_OFF=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==13)
-  			{
-  							if(data[i].SIM_CARD=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==14)
-  			{
-  							if(data[i].WIFI=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-			$td++	
-			});
-  			i++;
-  			});
+//		for(i=0; i<data.length;i++)
+//		{
+   		
+//  		var i=0;
+//  			$('#tableId > tbody  > tr').each(function()
+//  			{
+//  			$td=0
+//  			$(this).find('td').each (function() {
+//  			
+//  			if($td==2)
+//  			{
+//  							if(data[i].FRONTEND=="true")
+//  							{
+//  								$(this).find('input').attr('checked',true);
+//  							}
+//  			}
+//  			if($td==3)
+//  			{
+//  							if(data[i].BACKEND=="true")
+//  							{
+//  								$(this).find('input').attr('checked',true);
+//  							}
+//  			}
+//  			if($td==4)
+//  			{
+//  							if(data[i].NO_COMPLAINT=="true")
+//  							{
+//  								$(this).find('input').attr('checked',true);
+//  							}
+//  			}
+//  			if($td==5)
+//  			{
+//  							if(data[i].AUDIO_ALERT=="true")
+//  							{
+//  								$(this).find('input').attr('checked',true);
+//  							}
+//  			}
+//  			if($td==6)
+//  			{
+//  							if(data[i].BATTERY=="true")
+//  							{
+//  								$(this).find('input').attr('checked',true);
+//  							}
+//  			}
+//  			if($td==8)
+//  			{
+//  							if(data[i].CAMERA=="true")
+//  							{
+//  								$(this).find('input').attr('checked',true);
+//  							}
+//  			}
+//  			if($td==7)
+//  			{
+//  							if(data[i].BLUETOOTH=="true")
+//  							{
+//  								$(this).find('input').attr('checked',true);
+//  							}
+//  			}
+//  			if($td==9)
+//  			{
+//  							if(data[i].CHARGING=="true")
+//  							{
+//  								$(this).find('input').attr('checked',true);
+//  							}
+//  			}
+//  			if($td==10)
+//  			{
+//  							if(data[i].DISPLAY_KEYBORED=="true")
+//  							{
+//  								$(this).find('input').attr('checked',true);
+//  							}
+//  			}
+//  			if($td==11)
+//  			{
+//  							if(data[i].MEMORY_CARD=="true")
+//  							{
+//  								$(this).find('input').attr('checked',true);
+//  							}
+//  			}
+//  			if($td==12)
+//  			{
+//  							if(data[i].POWER_ON_OFF=="true")
+//  							{
+//  								$(this).find('input').attr('checked',true);
+//  							}
+//  			}
+//  			if($td==13)
+//  			{
+//  							if(data[i].SIM_CARD=="true")
+//  							{
+//  								$(this).find('input').attr('checked',true);
+//  							}
+//  			}
+//  			if($td==14)
+//  			{
+//  							if(data[i].WIFI=="true")
+//  							{
+//  								$(this).find('input').attr('checked',true);
+//  							}
+//  			}
+//			$td++	
+//			});
+//  			i++;
+//  			});
   		
   		//}//End of for
   		

@@ -1,0 +1,38 @@
+<html>
+<head>
+   <title>Matrix Download</title>
+</head>
+   <% include head.ejs%>
+		<script>
+			$(document).ready(function(){
+			 $('.sidebar-nav li a').click(function() {
+			 		window.location.href = $(this).attr('href');
+			 	});
+			 $("#menu-toggle").click(function(e) {
+    		    	e.preventDefault();
+        			$("#wrapper").toggleClass("toggled");
+    			});
+		}); 
+		</script>
+</head>
+<body>
+	<body>
+		<% include header.ejs%>
+		
+		<div id="wrapper">
+			<div id="sidebar-wrapper">
+				<% include menu.html %>
+			</div>
+			<div id="page-content-wrapper">
+				<a href="#menu-toggle"  class = "fa fa-arrow-circle-left fa-3x" id="menu-toggle"></a>
+	<form name="matrixdownload" action="/download" method="">
+	
+	<h3><centre> Matrix Download </center></h3>
+	<h4>Click here for matrix download</h4>
+	<input name="downloadbtn" type="submit" value="Download" />
+	
+	</form>
+	</body>
+</html>  
+
+	

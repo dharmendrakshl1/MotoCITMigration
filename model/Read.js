@@ -3,14 +3,20 @@
  */
 var fs = require('fs');
 var mongoose = require('mongoose');
+var bodyParser   = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var configDB = require('../config/database.js');
 var Schema = mongoose.Schema;
 //var RdUser = mongoose.model('Readtext');
 //var RdUser =require('../repository/TestCaseDb');
 exports.showhomepage = function(req, res) {
+	res.render('welcomepage', {
+		user : req.user
+	});
+};
+
+exports.showloadpage = function(req, res) {
 	res.render('loadtestcase', {
-		title : 'Akshatha',
 		user : req.user
 	});
 };
@@ -18,13 +24,17 @@ exports.showhomepage = function(req, res) {
 exports.uploadtestcase = function(req, res) {
 //update to testcase- Status
 	
-	var form = req.form;
+	//var form = req.form;
 	// console.log(req.files.upfilename);
-	console.log(req.files.upload.name);
-	console.log(req.files.upload.path);
-	var fname = req.files.upload.name;
+	console.log("checking");
+	console.log("upload :",req.files);
+	console.log(req.files.fileupload.name);
+	console.log(req.files.fileupload.path);
+	//res.send('upl:' + req.files.fileupload.name);
+	//var fname = req.files.upload.name;
 
-	fs.readFile(req.files.upload.path, 'utf8', function(err, data) {
+	
+	fs.readFile(req.files.fileupload.path, 'utf8', function(err, data) {
 		if (err) {
 			return console.log(err);
 		}
@@ -32,17 +42,33 @@ exports.uploadtestcase = function(req, res) {
 		
 	MongoClient.connect(configDB.url, function(err, db) {
 		if(err) { return console.dir(err); }
-		var collections = db.collection('mt_testcases');
+		var collections = db.collection('testcases');
 		collections.update({STATUS:1}, {$set:{STATUS:2}}, {w:1, multi: true}, function(err, result) {});
 		collections.update({STATUS:0}, {$set:{STATUS:1}}, {w:1, multi: true}, function(err, result) {});
 	
+		var userName = "";
+		
+		if(req.user.local.email)
+			{
+			userName = req.user.local.email;
+			}
+		if(req.user.facebook.token)
+			{
+			userName = req.user.facebook.email; 
+			}
+		if(req.user.google.token){
+			userName = req.user.google.email;
+		}
+		if(req.user.twitter.token){
+			userName = req.user.twitter.username;
+		}
 		//insert to testcases
 		var testcasedocument = {
 				ID : 103,
 				NAME : 'testcase12',
 				STATUS : 0,
-				CREATED_BY : 'aksha',
-				MODIFIED_BY : 'aksha',
+				CREATED_BY : userName,
+				MODIFIED_BY : userName,
 				CREATED_DATE : new Date(),
 				MODIFIED_DATE : new Date(),
 				TESTCASE_NAME : data
@@ -57,7 +83,7 @@ exports.uploadtestcase = function(req, res) {
 	});
 	});
 	
-	res.render('success');	
+	res.render('success',{user:req.user});	
 	};
 
 

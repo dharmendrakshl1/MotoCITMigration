@@ -43,11 +43,11 @@ var RecipeStepsSchema = new Schema({
 
 
 
-var XUser = mongoose.model('MT_RECIPEXML', RecipeSchema);
+var XUser = mongoose.model('mt_recipexmls', RecipeSchema);
 //recipexml table insert new recipe file name
 
 
-var SUser = mongoose.model('MT_RECIPE_STEPS', RecipeStepsSchema);
+var SUser = mongoose.model('mt_recipe_steps', RecipeStepsSchema);
 // steps table insert the recipes details as each record based on the test cases			
 
 
@@ -57,20 +57,19 @@ exports.showRecipePage = function (req, res) {
 
 		if(err) { return console.dir(err); }
 
-		console.log("Connected to mt_recipexmls db");
+		console.log("Connected to mt_recipexmls db in configDB.url");
 		var collection = db.collection('mt_recipexmls');
 										
 		console.log("Data selected from DB for drop down");
 		collection.find({STATUS:0}).toArray(function(err, items) {
 			console.log("items : ",items);
 			
-		var collection2 = db.collection('mt_testcases');
+		var collection2 = db.collection('testcases');
 		console.log("Data selected from DB for testcase tab");
-						
 		var stream = collection2.find({STATUS:0}).stream();
 		stream.on("data", function(item) {
 		console.log("item : ",item.TESTCASE_NAME);
-		res.render('RecipeGenerationNew',{ item: items , testCaseName: item.TESTCASE_NAME});
+		res.render('RecipeGenerationNew',{ user: req.user, item: items , testCaseName: item.TESTCASE_NAME});
 			
 		 });
 		 stream.on("end", function() {}); 
@@ -104,6 +103,7 @@ exports.loadTestcases = function (req, res) {
 	});
 };
 
+
 exports.saveRecipe = function(req, res){
 	
 	var form = req.form; //req.form;
@@ -116,12 +116,7 @@ exports.saveRecipe = function(req, res){
 		}	
 });
 	
-	
-	
-	
-	
-	
-	
+		
 	/*
 	 * get the max(id) from MT_RECIPEXML assign it a var increment it and assign to new variable if number of record is zero then assign i=0
 	 */
@@ -137,6 +132,22 @@ exports.saveRecipe = function(req, res){
 		  recipeXMLID=recipeXMLCount+1;
 		  console.log("recipeXMLID : "+recipeXMLID);
 		
+		  var userName = "";
+			
+			if(req.user.local.email)
+				{
+				userName = req.user.local.email;
+				}
+			if(req.user.facebook.token)
+				{
+				userName = req.user.facebook.email; 
+				}
+			if(req.user.google.token){
+				userName = req.user.google.email;
+			}
+			if(req.user.twitter.token){
+				userName = req.user.twitter.username;
+			}
 	
 		var recipeFileName =req.query.recipeFileName;
 		console.log("recipeFileName"+ recipeXMLID);
@@ -146,12 +157,12 @@ exports.saveRecipe = function(req, res){
 				VERSION: '0',
 				RECIPE_FILE: 'recipefile.xml',//steps details	
 				EXTRANET_URL: 'https://rsdsecure-test.motorola.com/download/testing12.txt',
-				STATUS: '0',
+				STATUS: 0,
 				ERROR_MESSAGE: '',
 				MT_TESTCASES_ID: 103,
-				CREATED_BY: 'aksha',
+				CREATED_BY: userName,
 				CREATED_DATE: new Date(),
-				MODIFIED_BY: 'aksha',
+				MODIFIED_BY: userName,
 				MODIFIED_DATE: new Date(),
 				EXTRANET_FILE_NAME:'testing12'
 				});
@@ -200,7 +211,7 @@ exports.saveRecipe = function(req, res){
 	
 	}
 	})	
-	res.render('index');
+	res.render('welcomepage', {user: req.user});
 	res.end();
 	
 	

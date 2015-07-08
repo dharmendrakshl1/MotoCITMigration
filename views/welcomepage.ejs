@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Welcome To MotoCIT</title>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#resetbtn").click(function(){
+    	$('#up').val('');
+    }); 
+    });  
+</script>
+</head>
+<body>
+		<% include head.ejs%>
+		<script>
+			$(document).ready(function(){
+			 $('.sidebar-nav li a').click(function() {
+			 		window.location.href = $(this).attr('href');
+			 	});
+			 $("#menu-toggle").click(function(e) {
+    		    	e.preventDefault();
+        			$("#wrapper").toggleClass("toggled");
+    			});
+		}); 
+		</script>
+		
+	</head>
+	<body>
+		<% include header.ejs%>
+		
+		<div id="wrapper">
+			<div id="sidebar-wrapper">
+				<% include menu.html %>
+			</div>
+			<div id="page-content-wrapper">
+				<a href="#menu-toggle"  class = "fa fa-arrow-circle-left fa-3x" id="menu-toggle"></a>
+
+<td>
+<p>
+	
+<h2><img src = "bullet.gif" alt = "Bullet Image"> Welcome To MotoCIT </h2></p>
+
+<br></br>
+<br></br>
+
+<br>
+</td>      
+</tr>
+
+<tr>
+</tr>
+</table>
+</form>
+</body>
+</html>

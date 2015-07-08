@@ -1,5 +1,7 @@
 var RecipeGeneration = require('../model/RecipeGeneration');
 var read = require('../model/Read');
+var MatrixUpdate = require('../model/MatrixUpdate');
+var JsonFileManagement = require('../model/JsonFileManagement');
 
 module.exports = function (app, passport) {
 	
@@ -37,7 +39,7 @@ module.exports = function (app, passport) {
 
          // process the login form
          app.post('/login', passport.authenticate('local-login', {
-             successRedirect : '/loadtestcase', // redirect to the secure profile section
+             successRedirect : '/welcomepage', // redirect to the secure profile section
              failureRedirect : '/login', // redirect back to the signup page if there is an error
              failureFlash : true // allow flash messages
          }));
@@ -50,7 +52,7 @@ module.exports = function (app, passport) {
 
          // process the signup form
          app.post('/signup', passport.authenticate('local-signup', {
-             successRedirect : '/loadtestcase', // redirect to the secure profile section
+             successRedirect : '/welcomepage', // redirect to the secure profile section
              failureRedirect : '/signup', // redirect back to the signup page if there is an error
              failureFlash : true // allow flash messages
          }));
@@ -63,7 +65,7 @@ module.exports = function (app, passport) {
          // handle the callback after facebook has authenticated the user
          app.get('/auth/facebook/callback',
              passport.authenticate('facebook', {
-                 successRedirect : '/loadtestcase',
+                 successRedirect : '/welcomepage',
                  failureRedirect : '/'
              }));
 
@@ -75,7 +77,7 @@ module.exports = function (app, passport) {
          // handle the callback after twitter has authenticated the user
          app.get('/auth/twitter/callback',
              passport.authenticate('twitter', {
-                 successRedirect : '/loadtestcase',
+                 successRedirect : '/welcomepage',
                  failureRedirect : '/'
              }));
 
@@ -88,7 +90,7 @@ module.exports = function (app, passport) {
          // the callback after google has authenticated the user
          app.get('/auth/google/callback',
              passport.authenticate('google', {
-                 successRedirect : '/loadtestcase',
+                 successRedirect : '/welcomepage',
                  failureRedirect : '/'
              }));
 
@@ -101,7 +103,7 @@ module.exports = function (app, passport) {
                   res.render('connect-local.ejs', { message: req.flash('loginMessage') });
               });
               app.post('/connect/local', passport.authenticate('local-signup', {
-                  successRedirect : '/loadtestcase', // redirect to the secure profile section
+                  successRedirect : '/welcomepage', // redirect to the secure profile section
                   failureRedirect : '/connect/local', // redirect back to the signup page if there is an error
                   failureFlash : true // allow flash messages
               }));
@@ -114,7 +116,7 @@ module.exports = function (app, passport) {
               // handle the callback after facebook has authorized the user
               app.get('/connect/facebook/callback',
                   passport.authorize('facebook', {
-                      successRedirect : '/loadtestcase',
+                      successRedirect : '/welcomepage',
                       failureRedirect : '/'
                   }));
 
@@ -126,7 +128,7 @@ module.exports = function (app, passport) {
               // handle the callback after twitter has authorized the user
               app.get('/connect/twitter/callback',
                   passport.authorize('twitter', {
-                      successRedirect : '/loadtestcase',
+                      successRedirect : '/welcomepage',
                       failureRedirect : '/'
                   }));
 
@@ -139,7 +141,7 @@ module.exports = function (app, passport) {
               // the callback after google has authorized the user
               app.get('/connect/google/callback',
                   passport.authorize('google', {
-                      successRedirect : '/loadtestcase',
+                      successRedirect : '/welcomepage',
                       failureRedirect : '/'
                   }));
 
@@ -156,7 +158,7 @@ module.exports = function (app, passport) {
                    user.local.email    = undefined;
                    user.local.password = undefined;
                    user.save(function(err) {
-                       res.redirect('/loadtestcase');
+                       res.redirect('/welcomepage');
                    });
                });
 
@@ -165,7 +167,7 @@ module.exports = function (app, passport) {
                    var user            = req.user;
                    user.facebook.token = undefined;
                    user.save(function(err) {
-                       res.redirect('/loadtestcase');
+                       res.redirect('/welcomepage');
                    });
                });
 
@@ -174,7 +176,7 @@ module.exports = function (app, passport) {
                    var user           = req.user;
                    user.twitter.token = undefined;
                    user.save(function(err) {
-                       res.redirect('/loadtestcase');
+                       res.redirect('/welcomepage');
                    });
                });
 
@@ -183,7 +185,7 @@ module.exports = function (app, passport) {
                    var user          = req.user;
                    user.google.token = undefined;
                    user.save(function(err) {
-                       res.redirect('/loadtestcase');
+                       res.redirect('/welcomepage');
                    });
                });
 
@@ -199,12 +201,23 @@ module.exports = function (app, passport) {
         // =============================================================================
         // Routes to Other Pages========================================================
         // =============================================================================
-           app.get('/loadtestcase', isLoggedIn, read.showhomepage);
+           app.get('/welcomepage', isLoggedIn, read.showhomepage);
+           app.get('/loadtestcase', isLoggedIn, read.showloadpage);
+           /*app.post('/uploadtestcase', isLoggedIn, function(req, res){
+          // console.log("Before Render Upload : ",req.query.upload);
+        	   console.log("upload :",req.files);
+        		console.log(req.files.fileupload.name);
+        		console.log(req.files.fileupload.path);
+        	  res.send('upl:' + req.files.fileupload.path);
+           });*/
            app.post('/uploadtestcase', isLoggedIn, read.uploadtestcase);
-           app.get('/RecipeGeneration', isLoggedIn, RecipeGeneration.showRecipePage);
-           app.get('/RecipeGenerationNew', isLoggedIn, RecipeGeneration.showRecipePage);
-           app.get('/RecipeGen', isLoggedIn, RecipeGeneration.showRecipePage);
+           app.get('/RecipeGenerationNew', isLoggedIn,RecipeGeneration.showRecipePage);
            app.get('/saveRecipe', isLoggedIn, RecipeGeneration.saveRecipe);
-           app.post('/RESTWSRecipeGeneration', isLoggedIn, RecipeGeneration.loadTestcases);
-		
+           app.post('/RESTWSRecipeGeneration',RecipeGeneration.loadTestcases);
+           app.get('/jsonfilemanagement',isLoggedIn, JsonFileManagement.jsonFileManagement);
+      		app.post('/jsonfile', isLoggedIn, MatrixUpdate.jsonfile);	//on save
+      		app.get('/matrixdownload',isLoggedIn, MatrixUpdate.matdownload);
+      		app.get('/download', isLoggedIn, MatrixUpdate.download);
+      		app.get('/downloadsuccess',isLoggedIn, MatrixUpdate.downloadsuccess);
+      				
 };

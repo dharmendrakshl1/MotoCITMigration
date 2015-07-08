@@ -22,7 +22,7 @@
 		
 	</head>
 	<body>
-		<% include header.html%>
+		<% include header.ejs%>
 		
 		<form name="recipeGenerationForm" method="get" action="/saveRecipe">
 		
@@ -53,12 +53,12 @@
 								<a class="btn btn-primary" href="#" id = "LoadButton" role="button">Load</a>
 							</div>
 	
-						<a class="btn btn-primary btn-newRecipe" href="#" role="button" id="newButton">New</a>
+						<a class="btn btn-primary" href="#"  role="button" id="newButton">New</a>
 						<div class = "fileSubmit">
 <!--						<form name="recipeGenerationForm" method="get" action="/saveRecipe">	-->
 							<input style="width: 200px;" type="text" name="recipeFileName" id="recipeFileName" class="form-control" placeholder="File Name"/>
 							<input type="submit" class="btn btn-primary" id="recipeSubmit" value="Submit" onClick="createRecipeList()"/>
-			
+							<input type="hidden" name="TClength" id="tClengthID" value="" >	
 							</div>
  				 			</div><!-- panel-body-->
 							</div>	
@@ -68,56 +68,61 @@
 							<div class = "table-panel-title">
 								<h4>Recipe Details: Please select the appropriate Check Boxes to generate Recipe.</h4>
 							</div>
+							
 							<table id="tableId" class="row1" >
+							
 	    					<thead>
+	    					<div class="center">
 							   <tr bgColor=#cccccc>
+							   
 															<th height="34" align="center"><strong>Sno</strong></th>
 
 															<th align="center"><strong>Test Cases </strong></th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong> FrontEnd</strong></th>
+															<th align="center"> <strong> FrontEnd</strong><br><input type="checkbox"
+																class="allCB" /></th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" />BackEnd<strong> 
-															</strong></th>
+															<th align="center"><strong>BackEnd
+															</strong><br><input type="checkbox"
+																class="allCB" /></th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>No Complaint Provided
-															</strong></th>
+															<th align="center"><strong>No Complaint Provided
+															</strong><br><input type="checkbox"
+																class="allCB" /> </th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Audio/Alert </strong></th>
+															<th align="center"><strong>Audio/Alert </strong><br><input type="checkbox"
+																class="allCB" /> </th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Battery </strong></th>
+															<th align="center"><strong>Battery </strong><br><input type="checkbox"
+																class="allCB" /> </th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Bluetooth </strong></th>
+															<th align="center"> <strong>Bluetooth </strong><br><input type="checkbox"
+																class="allCB" /></th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Camera </strong></th>
+															<th align="center"><strong>Camera </strong><br><input type="checkbox"
+																class="allCB" /> </th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Charging </strong></th>
+															<th align="center"><strong>Charging </strong><br><input type="checkbox"
+																class="allCB" /> </th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /><strong>Display/Keypad </strong></th>
+															<th align="center"><strong>Display/Keypad </strong><br><input type="checkbox"
+																class="allCB" /></th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Memory Card </strong></th>
+															<th align="center"><strong>Memory Card </strong><br><input type="checkbox"
+																class="allCB" /> </th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Power On/Off </strong></th>
+															<th align="center"> <strong>Power On/Off </strong><br><input type="checkbox"
+																class="allCB" /></th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>SIM Card </strong></th>
+															<th align="center"> <strong>SIM Card </strong><br><input type="checkbox"
+																class="allCB" /></th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Wifi </strong></th>
+															<th align="center"><strong>Wifi </strong><br><input type="checkbox"
+																class="allCB" /> </th>
 
 															<th align="center"><strong>Delete </strong></th>
 														</tr>
+														</div>
 
 								</tr>
 								
@@ -145,11 +150,11 @@
 									<td align="center"><input type="checkbox"  class="PowerOnOffCB" name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0" class="allCB" /> <strong> </strong></td>
 									<td align="center"><input type="checkbox"  class="SimCardCB" name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0" class="allCB" /> <strong> </strong></td>
 									<td align="center"><input type="checkbox"   class="WifiCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0" class="allCB" /> <strong></strong></td>
-									<td align="center"><input type="hidden" name="delete" class="deleteRecipe del" value="delete" ><span class="glyphicon glyphicon-trash">
+									<td align="center"><input type="button" name="delete" class="deleteRecipe del" value="delete" >
 														<strong> </strong></td>
 							</tr>
 						<% } %> 											
-					<input type="hidden" name="TClength" id="tClengthID" value="" >	
+					
 					
 				</tbody>
 				

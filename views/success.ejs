@@ -11,12 +11,28 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
 </script>
+<% include head.ejs%>
+		<script>
+			$(document).ready(function(){
+			 $('.sidebar-nav li a').click(function() {
+			 		window.location.href = $(this).attr('href');
+			 	});
+			 $("#menu-toggle").click(function(e) {
+    		    	e.preventDefault();
+        			$("#wrapper").toggleClass("toggled");
+    			});
+		}); 
+		</script>
 </head>
 <body>
-<% include header.ejs %>
-<div class = "menu">
-<%include menu.html %>
-</div>
+<% include header.ejs%>
+		
+		<div id="wrapper">
+			<div id="sidebar-wrapper">
+				<% include menu.html %>
+			</div>
+			<div id="page-content-wrapper">
+				<a href="#menu-toggle"  class = "fa fa-arrow-circle-left fa-3x" id="menu-toggle"></a>
 <h3>File saved Successfully</h3>
 </body>
 </html>

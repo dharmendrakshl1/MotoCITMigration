@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Json File Management</title>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+   alert("loaded");
+   $("#cancelbtn").click(function(){
+    	location.reload();
+    }); 
+   
+   $(document).on("change", "#selectedMarketNames", function() {
+
+     $("#marketName").val( this.value ); 
+     $("#fileName").val( $("#fileNamevalue").val());
+     $("#fileURL").val( $("#fileURLvalue").val());
+
+  }).val( $('#marketName').val() ).change();
+  
+  
+  
+  
+   });
+</script>
+</head>
+<body >
+<table width="100%">
+		<tr>
+		<h3>					
+				<center> Json File Management </center>
+		</h3>
+		
+		<form name="jasonFileManagementForm" action="/jsonfile" method="post">
+		<input type="hidden" id ="marketId" name="marketId" value="">
+		
+		<tr><td align="right" width="35%">
+			<p style="text-align: right;">
+						selectedMarketNames
+						<select name="selectedMarketNames" id ="selectedMarketNames"> 
+						<option value="-1">-- Select --</option>
+						<% for(var i=0; i<abc.item2.length; i++) {%>
+  						<option id="idoption" value="<%= abc.item2[i] %>" ><%= abc.item2[i] %></option>
+  						<% } %></select></td>
+			
+		</tr>		
+			
+		<tr height="20px"></tr>	
+			<tr><td align="right" width="35%">							
+					    	<span style="color:#0000ff;">MotoService Market Name : </span>
+				</td>
+					<td align="left" width="65%">
+					    	<input id ="marketName" name="marketName" type="text" value=""><span id="marketNameError" style="color='display ='none'"> </span>
+				</td>
+		</tr>
+		
+		<tr>
+			<td align="right">
+							<span style="color:#0000ff;"> File Name : </span>
+			</td>
+				
+			<td align="left">
+							<input id="fileNamevalue" value = "<%= abc.item3[0] %>" type="hidden"/>
+							<input id ="fileName" name="fileName" type="text" value=""><span id="fileNameError" style="display ='none'"> </span>
+			</td>
+		</tr>
+			
+		<tr>
+			<td align="right">
+							<span style="color:#0000ff;">File URL :</span>
+			</td>
+			<td align="left">
+							<input id="fileURLvalue" value = "<%= abc.item3[1] %>" type="hidden"/>
+							<input id ="fileURL" name="fileURL" type="text" value=""> <span id="fileURLError" style="display ='none'"> </span>
+			</td>
+		</tr>	
+		
+		<tr height="20px"></tr>
+		<tr>
+			<td align="right">
+							<input name="savebutton" type="submit" value="SAVE" id="savebtn" />
+			</td>
+			<td align="left">
+			                <input type="button" name="Cancel" value="Cancel" id="cancelbtn"> 
+			</td>
+		</tr>
+	</tr>
+					
+	</table>
+	</form>
+	</body>
+</html>
+
