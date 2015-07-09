@@ -51,16 +51,16 @@ $(document).ready(function(){
 
 <table width="100%">
 		<tr>
-		<h3>					
+		<h2>		
 				<center> Json File Management </center>
-		</h3>
+		</h2>
 		
 		<form name="jasonFileManagementForm" action="/jsonfile" method="post">
 		<input type="hidden" id ="marketId" name="marketId" value="">
 		
-		<tr><td align="right" width="35%">
-			<p style="text-align: right;">
-						selectedMarketNames
+		<tr><td >
+			<p style="color:#0000ff;" align="right"  >
+						Select Market Names
 						<select name="selectedMarketNames" id ="selectedMarketNames"> 
 						<option value="-1">-- Select --</option>
 						<% for(var i=0; i<abc.item2.length; i++) {%>
@@ -70,7 +70,7 @@ $(document).ready(function(){
 		</tr>		
 			
 		<tr height="20px"></tr>	
-			<tr><td align="right" width="35%">							
+			<tr><td align="right">							
 					    	<span style="color:#0000ff;">MotoService Market Name : </span>
 				</td>
 					<td align="left" width="65%">
