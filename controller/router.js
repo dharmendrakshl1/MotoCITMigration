@@ -8,7 +8,10 @@ module.exports = function (app, passport) {
 	// normal routes ==============================================================
     // show the home page (will also have our login links)
     app.get('/', function(req, res) {
-        res.render('index.ejs');
+    	if(!req.user)
+    		res.render('index.ejs');
+    	else
+    		res.render('welcomepage.ejs', {user: req.user});
     });
     
  // PROFILE SECTION =========================
@@ -30,6 +33,20 @@ module.exports = function (app, passport) {
  // AUTHENTICATE (FIRST LOGIN) ==================================================
  // =============================================================================
 
+    //LDAP Authentication
+    // show the login form
+    app.get('/ldaplogin', function(req, res) {
+        res.render('ldaplogin.ejs', { message: req.flash('loginMessage') });
+    });
+
+    // process the login form
+    app.post('/ldaplogin', passport.authenticate('ldap-login', {
+        successRedirect : '/welcomepage', // redirect to the secure profile section
+        failureRedirect : '/ldaplogin', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
+    
+    
      // locally --------------------------------
          // LOGIN ===============================
          // show the login form
@@ -216,9 +233,9 @@ module.exports = function (app, passport) {
            app.get('/saveRecipe', isLoggedIn, RecipeGeneration.saveRecipe);
            app.post('/RESTWSRecipeGeneration',RecipeGeneration.loadTestcases);
            app.get('/jsonfilemanagement',isLoggedIn, JsonFileManagement.jsonFileManagement);
-      		app.post('/jsonfile', isLoggedIn, MatrixUpdate.jsonfile);	//on save
-      		app.get('/matrixdownload',isLoggedIn, MatrixUpdate.matdownload);
-      		app.get('/download', isLoggedIn, MatrixUpdate.download);
-      		app.get('/downloadsuccess',isLoggedIn, MatrixUpdate.downloadsuccess);
+           app.post('/jsonfile', isLoggedIn, MatrixUpdate.jsonfile);	//on save
+           app.get('/matrixdownload',isLoggedIn, MatrixUpdate.matdownload);
+           app.get('/download', isLoggedIn, MatrixUpdate.download);
+           app.get('/downloadsuccess',isLoggedIn, MatrixUpdate.downloadsuccess);
       				
 };
