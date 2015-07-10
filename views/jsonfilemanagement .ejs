@@ -11,16 +11,19 @@ $(document).ready(function(){
     }); 
    
    $(document).on("change", "#selectedMarketNames", function() {
-
+		if( $("#selectedMarketNames").val() =='-1')
+		{
+			location.reload();
+			
+		}
+		
      $("#marketName").val( this.value ); 
      $("#fileName").val( $("#fileNamevalue").val());
      $("#fileURL").val( $("#fileURLvalue").val());
 
   }).val( $('#marketName').val() ).change();
   
-  
-  
-  
+  	  
    });
 </script>
 </head>
@@ -51,12 +54,12 @@ $(document).ready(function(){
 
 <table width="100%" >
 		<tr>
-		<h2>		
-				<center> Json File Management </center>
-		</h2>
+		<h2>Json File Management</h2>
 		
 		<form name="jasonFileManagementForm" action="/jsonfile" method="post">
 		<input type="hidden" id ="marketId" name="marketId" value="">
+		</tr>
+		<tr>
 		
 		<tr><td >
 			<p style="color:#0000ff;" align="right"  >

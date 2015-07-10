@@ -211,7 +211,7 @@ exports.saveRecipe = function(req, res){
 	
 	}
 	})	
-	res.render('welcomepage', {user: req.user});
+	res.render('success', {user: req.user});
 	res.end();
 	
 	
