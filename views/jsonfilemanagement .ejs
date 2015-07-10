@@ -49,7 +49,7 @@ $(document).ready(function(){
 			<div id="page-content-wrapper">
 				<a href="#menu-toggle"  class = "fa fa-arrow-circle-left fa-3x" id="menu-toggle"></a>
 
-<table width="100%">
+<table width="100%" >
 		<tr>
 		<h2>		
 				<center> Json File Management </center>
@@ -62,7 +62,7 @@ $(document).ready(function(){
 			<p style="color:#0000ff;" align="right"  >
 						Select Market Names
 						<select name="selectedMarketNames" id ="selectedMarketNames"> 
-						<option value="-1">-- Select --</option>
+						<option value="">-- Select --</option>
 						<% for(var i=0; i<abc.item2.length; i++) {%>
   						<option id="idoption" value="<%= abc.item2[i] %>" ><%= abc.item2[i] %></option>
   						<% } %></select></td>
@@ -100,17 +100,26 @@ $(document).ready(function(){
 		</tr>	
 		
 		<tr height="20px"></tr>
-		<tr>
+		
+		
+		
+	<!--	<tr>
 			<td align="right">
 							<input name="savebutton" type="submit" value="SAVE" id="savebtn" />
 			</td>
+			
 			<td align="left">
 			                <input type="button" name="Cancel" value="Cancel" id="cancelbtn"> 
 			</td>
-		</tr>
+		</tr> -->
 	</tr>
 					
 	</table>
+	<center>
+	<input name="savebutton" type="submit" value="SAVE" id="savebtn" />
+		
+		 <input type="button" name="Cancel" value="Cancel" id="cancelbtn"> 
+	</center>
 	</form>
 	</body>
 </html>

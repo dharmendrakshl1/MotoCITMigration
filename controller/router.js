@@ -212,6 +212,7 @@ module.exports = function (app, passport) {
            });*/
            app.post('/uploadtestcase', isLoggedIn, read.uploadtestcase);
            app.get('/RecipeGenerationNew', isLoggedIn,RecipeGeneration.showRecipePage);
+           app.get('/RecipeGeneration', RecipeGeneration.showRecipePage);// added to show performance old recipe gen
            app.get('/saveRecipe', isLoggedIn, RecipeGeneration.saveRecipe);
            app.post('/RESTWSRecipeGeneration',RecipeGeneration.loadTestcases);
            app.get('/jsonfilemanagement',isLoggedIn, JsonFileManagement.jsonFileManagement);
