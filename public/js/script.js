@@ -43,7 +43,7 @@ $( document ).on( "click", ".del", function( event )
 	//  			'</tr>')
 	  		
   				$tableRows = '<tr class="row1"><td align="center">'+v+'</td><td align="center">'+data[i].STEP_DETAILS+'</td>'+
-	  			'<td align="center"><input class="frontend" type="checkbox"'; 
+  				'<td align="left" style="padding-left: 4px;"><input class="frontend" type="checkbox"';
   				
   				if(data[i].FRONTEND=="true")
 				{
@@ -51,7 +51,7 @@ $( document ).on( "click", ".del", function( event )
 				}
   				
   				$tableRows = $tableRows + ' /></td>'+
-	  			'<td align="center"><input class="backend" type="checkbox" STYLE="background-color:"#C5EFF7" '; 
+  				'<td align="left" style="padding-left: 4px;"><input class="backend" type="checkbox" STYLE="background-color:"#C5EFF7" '; 
   				
   				if(data[i].BACKEND=="true")
 				{
@@ -59,7 +59,7 @@ $( document ).on( "click", ".del", function( event )
 				}
   				
   				$tableRows = $tableRows + '/></td>'+
-	  			'<td align="center"><input class="nocomplain" type="checkbox"'; 
+  				'<td align="left" style="padding-left: 4px;" ><input class="nocomplain" type="checkbox"'; 
   				
   				if(data[i].NO_COMPLAINT=="true")
 				{
@@ -67,7 +67,7 @@ $( document ).on( "click", ".del", function( event )
 				}
   				
   				$tableRows = $tableRows + '/></td>'+
-	  			'<td align="center"><input class="audioalert" type="checkbox" STYLE="background-color:"#C5EFF7" ';
+  				'<td align="left" style="padding-left: 4px;"><input class="audioalert" type="checkbox" STYLE="background-color:"#C5EFF7" ';
   				
   				if(data[i].AUDIO_ALERT=="true")
 				{
@@ -75,7 +75,7 @@ $( document ).on( "click", ".del", function( event )
 				}
   				
   				$tableRows = $tableRows + '/></td>'+
-	  			'<td align="center"><input class="battery" type="checkbox"  ';
+  				'<td align="left" style="padding-left: 4px;"><input class="battery" type="checkbox"  ';
   				
   				if(data[i].BATTERY=="true")
 				{
@@ -83,7 +83,7 @@ $( document ).on( "click", ".del", function( event )
 				}
   				
   				$tableRows = $tableRows + '/></td>'+
-	  			'<td align="center"><input class="bluetooth" type="checkbox"  ';
+  				'<td align="left" style="padding-left: 4px;"><input class="bluetooth" type="checkbox"  ';
   				
   				if(data[i].BLUETOOTH=="true")
 				{
@@ -91,7 +91,7 @@ $( document ).on( "click", ".del", function( event )
 				}
   				
   				$tableRows = $tableRows + '/></td>'+
-	  			'<td align="center"><input class="camera" type="checkbox"  ';
+  				'<td align="left" style="padding-left: 4px;"><input class="camera" type="checkbox"  ';
   				
   				if(data[i].CAMERA=="true")
 				{
@@ -99,7 +99,7 @@ $( document ).on( "click", ".del", function( event )
 				}
   				
   				$tableRows = $tableRows + '/></td>'+
-	  			'<td align="center"><input class="charging" type="checkbox"  ';
+  				'<td align="left" style="padding-left: 4px;"><input class="charging" type="checkbox"  ';
   				
   				if(data[i].CHARGING=="true")
 				{
@@ -107,7 +107,7 @@ $( document ).on( "click", ".del", function( event )
 				}
   				
   				$tableRows = $tableRows + '/></td>'+
-	  			'<td align="center"><input class="displaykeyboard" type="checkbox" '; 
+  				'<td align="left" style="padding-left: 4px;"><input class="displaykeyboard" type="checkbox" '; 
   				
   				if(data[i].DISPLAY_KEYBORED=="true")
 				{
@@ -115,7 +115,7 @@ $( document ).on( "click", ".del", function( event )
 				}
   				
   				$tableRows = $tableRows + '/></td>'+
-	  			'<td align="center"><input class="memorycard" type="checkbox"  ';
+  				'<td align="left" style="padding-left: 4px;"><input class="memorycard" type="checkbox"  ';
   				
   				if(data[i].MEMORY_CARD=="true")
 				{
@@ -123,7 +123,7 @@ $( document ).on( "click", ".del", function( event )
 				}
   				
   				$tableRows = $tableRows + '/></td>'+
-	  			'<td align="center"><input class="poweronoff" type="checkbox"  ';
+  				'<td align="left" style="padding-left: 4px;"><input class="poweronoff" type="checkbox"  ';
   				
   				if(data[i].POWER_ON_OFF=="true")
 				{
@@ -131,7 +131,7 @@ $( document ).on( "click", ".del", function( event )
 				}
   				
   				$tableRows = $tableRows + '/></td>'+
-	  			'<td align="center"><input class="simcard" type="checkbox"  ';
+  				'<td align="left" style="padding-left: 4px;"><input class="simcard" type="checkbox"  ';
   				
   				if(data[i].SIM_CARD=="true")
 				{
@@ -139,7 +139,7 @@ $( document ).on( "click", ".del", function( event )
 				}
   				
   				$tableRows = $tableRows + '/></td>'+
-	  			'<td align="center"><input class="wifi" type="checkbox"  ';
+  				'<td align="left" style="padding-left: 4px;"><input class="wifi" type="checkbox"  ';
   				
   				if(data[i].WIFI=="true")
 				{
@@ -147,7 +147,7 @@ $( document ).on( "click", ".del", function( event )
 				}
   				
   				$tableRows = $tableRows + '/></td>'+
-	  			'<td align="center"><input type="button" name="delete" value="delete" class="del deleteRecipe"><strong> </strong></td>'+
+  				'<td align="left" style="padding-left: 4px;"><input type="button" name="delete" value="delete" class="del deleteRecipe"><strong> </strong></td>'+
 	  			'</tr>';
 	  			
 	  			$('#tableBodyID').append($tableRows);
