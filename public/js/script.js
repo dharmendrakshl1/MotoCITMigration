@@ -467,7 +467,6 @@ function createRecipeList()
 			//$ele = $( $( $( ".deleteRecipe" ).parent().parent() )[ $i ] ).children();
 			$ele = $($rows[$i]).children();
 			
-
 			$str = $str + '{ "testCase" : "' + $ele.eq(1).html().trim() + '",'  
 			+ '"frontEnd" : "' + $ele.eq(2).children().is(":checked") + '",'	
 			+ '"backEnd" : "' + $ele.eq(3).children().is(":checked") + '",'	
