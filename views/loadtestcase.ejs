@@ -7,8 +7,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-  $("#resetbtn").click(function(){
-    	$('#up').val('');
+   $("#cancelbtn").click(function(){
+    	location.reload();
     }); 
     });  
 </script>
@@ -38,41 +38,30 @@ $(document).ready(function(){
 				<a href="#menu-toggle"  class = "fa fa-arrow-circle-left fa-3x" id="menu-toggle"></a>
  
 <form name = "formName" method="post" enctype="multipart/form-data" action="/uploadtestcase">
-<table width="100%" border="0">
-<tr valign="top">
+<table>
+<tr>
+<td><p><h2>Load Supported Test Cases</h2></p></td>
+</tr>
+<tr>   </tr>
+<tr>
+<td><p><span style="color:#0000ff;"> Select the text file</span></p><p><span style="color:#0000ff;"> <input type="file" name="fileupload" id="fileupload"></span></p></td></tr>
+<tr><td> 
+<br></td>  </tr>                                                                               
+
+<td><p> <input type="submit" >  <input type="button" name="Reset" value="Reset" id="cancelbtn"></p></td>
+</tr>
 <td>
-<p>
-	
-<h2>Load Supported Test Cases</h2></p>
-
-<p> Select the text file (**) :
-<input type="file" name="fileupload" id="fileupload"> 
-
-</p>
-
-<br></br>
-<br></br>
-
-<p>
-
-<input type="submit" >
-   <input type="button" name="Reset" value="Reset" id="resetbtn">
-</p>
 	<br>
 	<hr>
-       <p>
-            ** Dear User, Please make sure you are following the below instructions:
+       <p><span style="color:#0000ff;">
+            *Dear User, Please make sure you are following the below instructions*
             <br>
-            	a. Select only flat text(.txt) file. No ZIP/gz/tar files are allowed.
+            	a. Select only flat text(.txt) file.
             	<br>
             	b. Parameters must be separated by comma.
-            	<br> 
-            	<!-- c. The first parameter of each line must be the CIT Market name of the phone model.
-            	 <br> -->
-            	c. The length of the each line or record must be less than 4000 characters.
-            
-            </p>
-            <hr>
+            	<br> </span>           
+        </p>
+     <hr>
 </td>      
 </tr>
 
