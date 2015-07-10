@@ -1,600 +1,185 @@
-<!DOCTYPE html>
 <html>
-<head>
-<style>
-.colour {
-	background-color: #e0ffff;
-}
-</style>
-<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
-</script>
-<script>
-$(document).ready(function(){
-
-
-//chethana code-------------------------------------------------------------------------------------------*****************----------------------------------------------
-$( document ).on( "click", ".del", function( event ) 
-	{
-		$(this).parent().parent().remove();
-	});
-	
-    $("#LoadButton").click(function(){
-    	//alert($("#selectedRecipeXmlId option:selected" ).val());
-    	$id=$("#selectedRecipeXmlId option:selected" ).val()
-    	
-        $.post("/RESTWSRecipeGeneration?id="+$id,function(data){
-        
-  		$('#content').val($("#selectedRecipeXmlId option:selected" ).val());
-  		
-  		  		   		
-  		var jsonString = JSON.stringify(data);
-  		
-  		$("#tableId > tbody > tr").remove();
-  		 
-   		for(i=0; i<data.length;i++)
-  		{
-  		  		  		  		
-  		$('#tableBodyID').append('<tr class="row"><td align="center">'+i+'</td><td align="center">'+data[i].STEP_DETAILS+'</td>'+
-  			'<td align="center"><input class="frontend" type="checkbox" /></td>'+
-  			'<td align="center"><input class="backend" type="checkbox" /></td>'+
-  			'<td align="center"><input class="nocomplain" type="checkbox" /></td>'+
-  			'<td align="center"><input class="audioalert" type="checkbox" /></td>'+
-  			'<td align="center"><input class="battery" type="checkbox" /></td>'+
-  			'<td align="center"><input class="bluetooth" type="checkbox" /></td>'+
-  			'<td align="center"><input class="camera" type="checkbox" /></td>'+
-  			'<td align="center"><input class="charging" type="checkbox" /></td>'+
-  			'<td align="center"><input class="displaykeyboard" type="checkbox" /></td>'+
-  			'<td align="center"><input class="memorycard" type="checkbox" /></td>'+
-  			'<td align="center"><input class="poweronoff" type="checkbox" /></td>'+
-  			'<td align="center"><input class="simcard" type="checkbox" /></td>'+
-  			'<td align="center"><input class="wifi" type="checkbox" /></td>'+
-  			'<td align="center"><input type="button" name="delete" value="delete" class="del deleteRecipe"><strong> </strong></td>'+
-  			'</tr>')
- 		
-  		} 
-  		
-  	//	for(i=0; i<data.length;i++)
-  	//	{
-  		var i=0;
-  			$('#tableId > tbody  > tr').each(function()
-  			{
-  			$td=0
-  			$(this).find('td').each (function() {
-  			
-  			if($td==2)
-  			{
-  							if(data[i].FRONTEND=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==3)
-  			{
-  							if(data[i].BACKEND=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==4)
-  			{
-  							if(data[i].NO_COMPLAINT=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==5)
-  			{
-  							if(data[i].AUDIO_ALERT=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==6)
-  			{
-  							if(data[i].BATTERY=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==8)
-  			{
-  							if(data[i].CAMERA=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==7)
-  			{
-  							if(data[i].BLUETOOTH=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==9)
-  			{
-  							if(data[i].CHARGING=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==10)
-  			{
-  							if(data[i].DISPLAY_KEYBORED=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==11)
-  			{
-  							if(data[i].MEMORY_CARD=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==12)
-  			{
-  							if(data[i].POWER_ON_OFF=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==13)
-  			{
-  							if(data[i].SIM_CARD=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-  			if($td==14)
-  			{
-  							if(data[i].WIFI=="true")
-  							{
-  								$(this).find('input').attr('checked',true);
-  							}
-  			}
-			$td++	
-			});
-  			i++;
-  			});
-  		
-  		//}//End of for
-  		
-  	   });//End of post
-    });//End of button click
-    
-    //Selecting 
-    var flag=false;
-   
-		   $('.row').click(function () {
-		 		flag = true;
-		 			 if($(this).attr('class').indexOf('colour') != -1)
-				    	{
-						 $(this).removeClass("colour");
-				    	}
-					 	else
-						{
-					
-							$add =false;
-							$previousColor=false;
-							$nextColor=false;
-					
-							if(Number($(this).index()+1)!=1)
-							{
-						    	if($(this).prev().attr('class').indexOf('colour') != -1)
-						    	{
-									$previousColor =true;
-						    	}
-						    
-							}
-							
-							if(Number($(this).index()+1)!=Number($(this).parent().children().last().index()))
-							{
-						 		if($(this).next().attr('class').indexOf('colour') != -1)
-					    		{
-							 		$nextColor = true;
-					    		}
-							
-						
-							}
-					
-					if($previousColor==true)
-						{
-						
-							$add = true;
-						
-						}
-					else if($nextColor==true)
-						{
-							$add = true;
-						}
-						
-					if(!$add)
-						{
-						$(this).parent().children().each(function(){
-				 			$(this).removeClass("colour");
-							});
-						}
-		 		//alert($add);
-					$(this).addClass("colour");
-						 }
-		});
-    
-    $('.Up').click(function () {
-			   
-			   if(!flag)
-				   alert("Please click on any row from table");
-				   $move=false;
-				   				   
-				   var row = $('tr.colour:first', '#tableId');
+	<head>
+		<% include head.ejs%>
+		<script>
+			$(document).ready(function(){
+			 $('.sidebar-nav li a').click(function() {
+			 		window.location.href = $(this).attr('href');
+			 	});
+			 $("#menu-toggle").click(function(e) {
+    		    	e.preventDefault();
+        			$("#wrapper").toggleClass("toggled");
+    			});
+    		
+    		$('.btn-newRecipe').click(function(){
+    			
+    		});
+    		
+		}); 
+		</script>
+		
+	</head>
+	<body>
+		<% include header.ejs%>
+		
+		<form name="recipeGenerationForm" method="get" action="/saveRecipe">
+		
+		<div id="wrapper">
+			<div id="sidebar-wrapper">
+				<% include menu.html %>
+			</div>
+			<div id="page-content-wrapper">
+				<a href="#menu-toggle"  class = "fa fa-arrow-circle-left fa-3x" id="menu-toggle"></a>
+				<div class="container-fluid">
 				
-	               $rows = $('tr.colour', '#tableId');
-				   
-				   //End newly added by Thammaaih
-				   $className=row.prev().attr('class');
-				   
-				   if($className=="row")
-					   {
-					   $move=true;
-					   }
-				   //end newly added
-				   if($move)
-					   {
-					   $rows.insertBefore(row.prev());
-					   $counter=0;
-					     $('#tableId > tbody  > tr').each(function()
-						  {
-							  $row = $(this);
-							  $row.find('td input[type="checkbox"]').each (function() {
-								  $nameValue = $(this).attr('name');
-								  $rowName = $nameValue.substring(0,11);
-								  $(this).attr('name',$rowName+$counter);
-								  
-							  });
-							  
-							  $counter++;  
-						});
-						  
-					   }
-
-		   });
-		   
-	$('.Down').click(function () {
-			   if(!flag)
-				   alert("Please click on any row from table");
-			   var row = $('tr.colour:last', '#tableId');
-			   $rows =new Array();
-               $rows = $('tr.colour', '#tableId');
-			   
-			     $move=false;
-				   $className=row.next().attr('class');
-				   if($className=="row")
-				   {
-				   $move=true;
-				   }
-				   //end newly added
-				  
-				   if($move)
-				   {
-					   $rows.insertAfter(row.next());
-					   $counter=0;
-					     $('#tableId > tbody  > tr').each(function()
-						  {
-							  $row = $(this);
-							  $row.find('td input[type="checkbox"]').each (function() {
-								  $nameValue = $(this).attr('name');
-								  $rowName = $nameValue.substring(0,11);
-								  $(this).attr('name',$rowName+$counter);
-								  
-							  });
-							  
-							  $counter++;  
-						});
-					  
-				   }
-
-		   });
-    
-    
-    
-    //chethana code-------------------------------------------------------------------------------------------*****************----------------------------------------------
+					
+					
+					<div class="panel panel-default">
+						<div class="panel-heading">
+    						<h3 class="panel-title">Recipe Generation</h3>
+  						</div>
+  						<div class="panel-body">
+					 		<input type="hidden" id="selectedXmlFileName" name="selectedXmlFileName" />
+					 		<input type="hidden" id="overWriteRecipeXmlId" name="overWriteRecipeXmlId" />
+					 		<select id="selectedRecipeXmlId" name="selectedRecipeXmlId">
+								<option value="Select">Select</option>
+								<% for(var i=0; i<item.length; i++) {%>
+  									<option value=<%= item[i].ID %> ><%= item[i].FILENAME %></option>
+								<% } %>
+							</select>
+							<div class = "recipe-button">  
+								<a class="btn btn-primary" href="#" id = "LoadButton" role="button">Load</a>
+							</div>
 	
-	//to reload page for new recipe
-	
-    $("#newButton").click(function(){
-    	location.reload();
-    });
-    
-	//Change checkbox state of all rows via table header
-	$(".allCB").click(function(event)
-	{
-		
-		//get selected column
-		$column = $(this).closest("th");
-		$columnIndex = $column.index();
-		
-		//get all available rows of the table
-		$rows = $(".deleteRecipe").closest("tr");
-
-		//identify if the checkboxes need to be checked or unchecked.
-		if ( $(this).is(":checked") ) 
-		{
-			$setCheckBox = true;
-		}
-		else
-		{
-			$setCheckBox = false;
-		}
-		
-		//iterate over the remaining rows and change their property with $setCheckBox.
-		if ( $rows.length > 0 )
-		{
-				for( $i=0; $i < $rows.length; $i++ )
-				{			
-					$ele = $( $( $( ".deleteRecipe" ).parent().parent() )[ $i ] ).children(); 
-					$ele.eq($columnIndex).children("input[type=checkbox]").prop("checked", $setCheckBox);
-				}
-		}
-	});	
-    
-    
-    
-  
-});
-
-$("#newButton").click(function(){
-	    	location.reload();
-});
-
-
-//Convert table data as form input data for form submission
-function createRecipeList()
-{
-
-	//identify rows with selected contents
-	$rows = $(".deleteRecipe").closest("tr").filter(':has(:checkbox:checked)');
-	$tClengthID=0;
-	//iterate over selected rows and generate string of inputs for submission for each row
-	if ( $rows.length > 0 )
-	{
-		$str = '[';
-		var $i=0;
-			
-		for( $i=0; $i < $rows.length; $i++ )
-		{
-						
-			$ele = $( $( $( ".deleteRecipe" ).parent().parent() )[ $i ] ).children();
-			
-
-			$str = $str + '{ "testCase" : "' + $ele.eq(1).html().trim() + '",'  
-			+ '"frontEnd" : "' + $ele.eq(2).children().is(":checked") + '",'	
-			+ '"backEnd" : "' + $ele.eq(3).children().is(":checked") + '",'	
-			+ '"complaint" : "' + $ele.eq(4).children().is(":checked") + '",'	
-			+ '"audioAlert" : "' + $ele.eq(5).children().is(":checked") + '",'	
-			+ '"battery" : "' + $ele.eq(6).children().is(":checked") + '",'	
-			+ '"bluetooth" : "' + $ele.eq(7).children().is(":checked") + '",'	
-			+ '"camera" : "' + $ele.eq(8).children().is(":checked") + '",'	
-			+ '"charging" : "' + $ele.eq(9).children().is(":checked") + '",'	
-			+ '"displayKeypad" : "' + $ele.eq(10).children().is(":checked") + '",'	
-			+ '"memoryCard" : "' + $ele.eq(11).children().is(":checked") + '",'	
-			+ '"powerOnOff" : "' + $ele.eq(12).children().is(":checked") + '",'	
-			+ '"simCard" : "' + $ele.eq(13).children().is(":checked") + '",'	
-			+ '"wifi" : "' + $ele.eq(14).children().is(":checked") + '"'	
-			+'}';
-			
-			if ( $i != ($rows.length -1) )
-			{
-				$str = $str + ',';	
-			}
-		}
-	}
-	$tClengthID=$i;	
-	$str = $str + "]"
-	
-	//alert($str);
-	$generatedJsonString = "<input type='hidden' name='recipeString' id='recipeString' value='" + $str + "' />";
-	
-	$("#generatedRecipeListContainer").html($generatedJsonString);
-	$("#tClengthID").val($tClengthID);
-}
-
-</script>
-</head>
-<body>
-<% include header.html %>
-<div class = "menu">
-	<%include menu.html %>
-</div>
-<div class = "container">
-	<div id="content"></div>
-
-	<form name="recipeGenerationForm" method="get" action="/saveRecipe">
-		<table width="100%">
-			<tr>
-				<td width="25%" valign="top"></td>
-				<td width="75%" valign="top">
-					<table width="100%" border="0">
-						<tr>
-							<td height="99">
-								<h3 align="left">Recipe Generation</h3> 
-								<table>
-									<tr>
-										<td><input type="hidden" id="associationFlag"
-											name="associationFlag"
-											value="" /> <input
-											type="hidden" id="selectedXmlFileName"
-											name="selectedXmlFileName" /> <input type="hidden"
-											id="overWriteRecipeXmlId" name="overWriteRecipeXmlId" /> <select
-											id="selectedRecipeXmlId" name="selectedRecipeXmlId"
-											style="width: 200px;">
-												<option value="Select">Select</option>
-												<% for(var i=0; i<item.length; i++) {%>
-  												 <option value=<%= item[i].ID %> ><%= item[i].FILENAME %></option>
-												 <% } %></select></td>
-										<td><input style="width: 100px;" type="button"
-											name="LoadButton" id="LoadButton" value="Load" /></td>
-										<td><strong>OR</strong></td>
-										<td><input style="width: 100px;" type="button"
-											name="newButton" id="newButton" value="New"/></td>
-									</tr>
-								</table> <br> <br>
-								<table class="CBHeader" width="100%" border="1" cellpadding="0"
-									cellspacing="0">
-									<tr>
-										<td valign="top">
-									<tr bgColor=#cccccc>
-										<td width="57%" height=32 colspan="3" align="left"><strong> Recipe Details:	</strong></td>
-									</tr>
-									<tr bgcolor="#cccccc">
-										<td>Please select the appropriate Check Boxes to generate Recipe.</td>
-									</tr>
-									<table cellSpacing=0 cellPadding=4 width="100%" border=0>
-
-										<tr bgColor=#cccccc>
-											<td width="57%" height=32>
-												<!-- <span id="RecpAdd" > --> <!-- <div style="height:400px;width:1200px;overflow:auto;"> -->
-												<table width="100%" id="tableId" border="1" cellpadding="0"
-													cellspacing="0">
-													<thead>
-														<tr bgColor=#cccccc>
+						<a class="btn btn-primary" href="#"  role="button" id="newButton">New</a>
+						<div class = "fileSubmit">
+<!--						<form name="recipeGenerationForm" method="get" action="/saveRecipe">	-->
+							<input style="width: 200px;" type="text" name="recipeFileName" id="recipeFileName" class="form-control" placeholder="File Name"/>
+							<input type="submit" class="btn btn-primary" id="recipeSubmit" value="Submit" onClick="createRecipeList()"/>
+							<input type="hidden" name="TClength" id="tClengthID" value="" >	
+							</div>
+ 				 			</div><!-- panel-body-->
+							</div>	
+					<br><br><br>
+					<div class="panel panel-default" id="recipe-table" >
+						<div class="panel-body">
+							<div class = "table-panel-title">
+								<h4>Recipe Details: Please select the appropriate Check Boxes to generate Recipe.</h4>
+							</div>
+							
+							<table id="tableId" class="row1" >
+							
+	    					<thead>
+	    					<div class="center">
+							   <tr bgColor=#cccccc>
+							   
 															<th height="34" align="center"><strong>Sno</strong></th>
 
 															<th align="center"><strong>Test Cases </strong></th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong> FrontEnd</strong></th>
+															<th align="center"> <strong> FrontEnd</strong><br><input type="checkbox"
+																class="allCB" /></th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" />BackEnd<strong> 
-															</strong></th>
+															<th align="center"><strong>BackEnd
+															</strong><br><input type="checkbox"
+																class="allCB" /></th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>No Complaint Provided
-															</strong></th>
+															<th align="center"><strong>No Complaint Provided
+															</strong><br><input type="checkbox"
+																class="allCB" /> </th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Audio/Alert </strong></th>
+															<th align="center"><strong>Audio/Alert </strong><br><input type="checkbox"
+																class="allCB" /> </th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Battery </strong></th>
+															<th align="center"><strong>Battery </strong><br><input type="checkbox"
+																class="allCB" /> </th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Bluetooth </strong></th>
+															<th align="center"> <strong>Bluetooth </strong><br><input type="checkbox"
+																class="allCB" /></th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Camera </strong></th>
+															<th align="center"><strong>Camera </strong><br><input type="checkbox"
+																class="allCB" /> </th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Charging </strong></th>
+															<th align="center"><strong>Charging </strong><br><input type="checkbox"
+																class="allCB" /> </th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /><strong>Display/Keypad </strong></th>
+															<th align="center"><strong>Display/Keypad </strong><br><input type="checkbox"
+																class="allCB" /></th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Memory Card </strong></th>
+															<th align="center"><strong>Memory Card </strong><br><input type="checkbox"
+																class="allCB" /> </th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Power On/Off </strong></th>
+															<th align="center"> <strong>Power On/Off </strong><br><input type="checkbox"
+																class="allCB" /></th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>SIM Card </strong></th>
+															<th align="center"> <strong>SIM Card </strong><br><input type="checkbox"
+																class="allCB" /></th>
 
-															<th align="center"><input type="checkbox"
-																class="allCB" /> <strong>Wifi </strong></th>
+															<th align="center"><strong>Wifi </strong><br><input type="checkbox"
+																class="allCB" /> </th>
 
 															<th align="center"><strong>Delete </strong></th>
 														</tr>
-													</thead>
-													<tbody id= "tableBodyID">
-													<% var testcaseNameLength =testCaseName.length%>
-													<%	console.log("testcaseNameLength: "+testCaseName.length);%>
-													
-													<%var name =testCaseName.split(",")%>
-													<% for(var i=0; i<name.length; i++) {%>
-													<tr id="tableContents" bgColor=#cccccc class="row">
-														<td height="34" align="center"><%= i+1 %></td>
+														</div>
 
-														<td align="center"><%= name[i] %></td>
-
-														<td align="center"><input type="checkbox"   class="FrontEndCB allCB" name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"
-															/> <strong> </strong></td>
-														
-
-														<td align="center"><input type="checkbox" class="BackEndCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"
-															class="allCB" /> <strong> </strong></td>
-
-														<td align="center"><input type="checkbox"  class="ComplaintCB" name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"
-															class="allCB" /> <strong> </strong></td>
-
-														<td align="center"><input type="checkbox"  class="AudioAlertCB" name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"
-															class="allCB" /> <strong> </strong></td>
-
-														<td align="center"><input type="checkbox"  class="BatteryCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"
-															class="allCB" /> <strong> </strong></td>
-
-														<td align="center"><input type="checkbox"  class="BluetoothCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"
-															class="allCB" /> <strong></strong></td>
-
-														<td align="center"><input type="checkbox"  class="CameraCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"
-															class="allCB" /> <strong> </strong></td>
-
-														<td align="center"><input type="checkbox"  class="ChargingCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"
-															class="allCB" /> <strong> </strong></td>
-
-														<td align="center"><input type="checkbox"  class="DisplayKeypadCB" name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"
-															class="allCB" /><strong> </strong></td>
-
-														<td align="center"><input type="checkbox"  class="MemoryCardCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"
-															class="allCB" /> <strong></strong></td>
-
-														<td align="center"><input type="checkbox"  class="PowerOnOffCB" name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"
-															class="allCB" /> <strong> </strong></td>
-
-														<td align="center"><input type="checkbox"  class="SimCardCB" name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"
-															class="allCB" /> <strong> </strong></td>
-
-														<td align="center"><input type="checkbox"   class="WifiCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"
-															class="allCB" /> <strong></strong></td>
-
-														<td align="center"><input type="button" name="delete" class="deleteRecipe del" value="delete" >
+								</tr>
+								
+								
+							</thead>
+	    					<tbody id = "tableBodyID">
+			    				<% var testcaseNameLength =testCaseName.length%>
+								<%var name =testCaseName.split(",")%>
+								<% for(var i=0; i<name.length; i++) {%>
+								
+								<tr id="tableContents">
+									<td height="34" align="center"><%= i+1 %></td>
+									<td align="center"><%= name[i] %></td>
+									<td align="left" style="
+    padding-left: 4px;"><input type="checkbox" class="FrontEndCB allCB" name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"/> <strong> </strong></td>
+									<td align="left" style="
+    padding-left: 4px;"><input type="checkbox" class="BackEndCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0"
+									class="allCB" /> <strong> </strong></td>
+									<td align="left" style="
+    padding-left: 4px;"><input type="checkbox"  class="ComplaintCB" name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0" class="allCB" /> <strong> </strong></td>
+									<td align="left" style="
+    padding-left: 4px;"><input type="checkbox"  class="AudioAlertCB" name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0" class="allCB" /> <strong> </strong></td>
+									<td align="left" style="
+    padding-left: 4px;"><input type="checkbox"  class="BatteryCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0" class="allCB" /> <strong> </strong></td>
+									<td align="left" style="
+    padding-left: 4px;"><input type="checkbox"  class="BluetoothCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0" class="allCB" /> <strong></strong></td>
+									<td align="left" style="
+    padding-left: 4px;"><input type="checkbox"  class="CameraCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0" class="allCB" /> <strong> </strong></td>
+									<td align="left" style="
+    padding-left: 4px;"><input type="checkbox"  class="ChargingCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0" class="allCB" /> <strong> </strong></td>
+									<td align="left" style="
+    padding-left: 4px;"><input type="checkbox"  class="DisplayKeypadCB" name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0" class="allCB" /><strong> </strong></td>
+									<td align="left" style="
+    padding-left: 4px;"><input type="checkbox"  class="MemoryCardCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0" class="allCB" /> <strong></strong></td>
+									<td align="left" style="
+    padding-left: 4px;"><input type="checkbox"  class="PowerOnOffCB" name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0" class="allCB" /> <strong> </strong></td>
+									<td align="left" style="
+    padding-left: 4px;"><input type="checkbox"  class="SimCardCB" name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0" class="allCB" /> <strong> </strong></td>
+									<td align="left" style="
+    padding-left: 4px;"><input type="checkbox"   class="WifiCB"  name="CheckBoxRow<%= i %>" id="CheckBoxRow<%= i %>" value="1" data-unchecked="0" class="allCB" /> <strong></strong></td>
+									<td align="left" style="
+    padding-left: 4px;"><input type="button" name="delete" class="deleteRecipe del" value="delete" >
 														<strong> </strong></td>
-													</tr>
-												<% } %> 
-												
-													<input type="hidden" name="TClength" id="tClengthID" value="" >
-												</tbody>
-													
-											</table>
-													
-											</table>
-											</td>
-										</tr>
-										<tr bgColor="#ffffff">
-											<td align="center"><input style="width: 100px;"
-												type="button" name="moveUp" id="moveUp" value="MoveUp"
-												class="Up" /><br /> <input style="width: 100px;"
-												type="button" name="moveDown" id="moveDown" value="MoveDown"
-												class="Down" /></td>
-										</tr>
-
-									</table>
-								</table>
-
-								<table>
-									<tr>
-										<td><strong><font style="color: red;">*</font>File
-												Name:</strong></strong></td>
-										<td><input style="width: 200px;" type="text"
-											name="recipeFileName" id="recipeFileName" /></td>
-										<td><input type="submit" id="recipeSubmit" value="Submit" onClick="createRecipeList()"/></td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table></td>
-			</tr>
-		</table>
+							</tr>
+						<% } %> 											
+					
+					
+				</tbody>
+				
+ 			</table>
+		</div>
+					</div> <!-- panel panel-default -->
+									
+                	
+				</div> <!--container-fluid-->
+				
+			</div> <!--page-content-wrapper -->
+		</div><!-- wrapper -->
 		<div id="generatedRecipeListContainer"></div>
-	</form>
-</body>
+		</form>
+	</body>
 </html>
