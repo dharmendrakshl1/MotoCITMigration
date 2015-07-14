@@ -443,7 +443,7 @@ $( document ).on( "click", ".del", function( event )
   
 });
 
-$("#newButton").click(function(){
+$("#NewButton").click(function(){
 	    	location.reload();
 });
 
