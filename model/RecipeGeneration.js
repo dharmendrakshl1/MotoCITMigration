@@ -78,6 +78,33 @@ exports.showRecipePage = function (req, res) {
 	
 };
 
+
+exports.showRecipeOldPage = function (req, res) {
+	MongoClient.connect(configDB.url, function(err, db) {
+
+		if(err) { return console.dir(err); }
+
+		console.log("Connected to mt_recipexmls db in configDB.url");
+		var collection = db.collection('mt_recipexmls');
+										
+		console.log("Data selected from DB for drop down");
+		collection.find({STATUS:0}).toArray(function(err, items) {
+			console.log("items : ",items);
+			
+		var collection2 = db.collection('testcases');
+		console.log("Data selected from DB for testcase tab");
+		var stream = collection2.find({STATUS:0}).stream();
+		stream.on("data", function(item) {
+		console.log("item : ",item.TESTCASE_NAME);
+		res.render('RecipeGeneration',{ user: req.user, item: items , testCaseName: item.TESTCASE_NAME});
+			
+		 });
+		 stream.on("end", function() {}); 
+		});
+	});
+	
+};
+
 //
 
 exports.loadTestcases = function (req, res) {
