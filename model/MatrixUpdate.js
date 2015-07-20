@@ -16,6 +16,7 @@ var mktName;
 	res.render('jsonfilemanagement');
 };*/
 
+// Akshatha
 exports.jsonfile = function (req, res){
 	var form = req.form; //req.form;
 	//console.log("form details " + form);

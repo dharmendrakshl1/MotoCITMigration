@@ -15,6 +15,8 @@ exports.showhomepage = function(req, res) {
 	});
 };
 
+//Akshatha
+
 exports.showloadpage = function(req, res) {
 	res.render('loadtestcase', {
 		user : req.user

@@ -53,15 +53,28 @@ var SUser = mongoose.model('mt_recipe_steps', RecipeStepsSchema);
 
 //chethana 
 exports.showRecipePage = function (req, res) {
+	
+	var startTime1 = process.hrtime();      // Akshatha - added to include Db time in UI page (start time)
+	
 	MongoClient.connect(configDB.url, function(err, db) {
 
 		if(err) { return console.dir(err); }
+		
+	var diffTime = process.hrtime(startTime1);	 // End time
 
 		console.log("Connected to mt_recipexmls db in configDB.url");
 		var collection = db.collection('mt_recipexmls');
 										
 		console.log("Data selected from DB for drop down");
+		
+	var startTime2 = process.hrtime();  //  start fetch time
+	
 		collection.find({STATUS:0}).toArray(function(err, items) {
+	
+	var diffTime2 = process.hrtime(startTime2); //  end of fetch
+	var dbConntime1 = ((diffTime[0] * 1000000 + diffTime[1]/1000) / 1000000); 
+	var dbConntime2 = ((diffTime2[0] * 1000000 + diffTime2[1]/1000) / 1000000);
+			
 			console.log("items : ",items);
 			
 		var collection2 = db.collection('testcases');
@@ -69,7 +82,7 @@ exports.showRecipePage = function (req, res) {
 		var stream = collection2.find({STATUS:0}).stream();
 		stream.on("data", function(item) {
 		console.log("item : ",item.TESTCASE_NAME);
-		res.render('RecipeGenerationNew',{ user: req.user, item: items , testCaseName: item.TESTCASE_NAME});
+		res.render('RecipeGenerationNew',{ user: req.user, item: items , testCaseName: item.TESTCASE_NAME, user1:dbConntime1, user2:dbConntime2});
 			
 		 });
 		 stream.on("end", function() {}); 
@@ -105,7 +118,7 @@ exports.showRecipeOldPage = function (req, res) {
 	
 };
 
-//
+// Akshatha
 
 exports.loadTestcases = function (req, res) {
 	MongoClient.connect(configDB.url, function(err, dbs) {
@@ -240,9 +253,5 @@ exports.saveRecipe = function(req, res){
 	})	
 	res.render('success', {user: req.user});
 	res.end();
-	
-	
-	
 
-	
 };
