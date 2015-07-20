@@ -33,7 +33,7 @@ exports.jsonFileManagement = function (req, res) {
 		var JsonDetail = [items[0].JSON_NAME,items[0].JSON_URL];
 			
 		console.log("1 " + dbConntime);
-			res.render('\jsonfilemanagement ',{user: req.user,abc: {item1: items, item2: MarketName, item3: JsonDetail}, user1:dbConntime});
+			res.render('\jsonfilemanagement',{user: req.user,abc: {item1: items, item2: MarketName, item3: JsonDetail}, user1:dbConntime});
 		 });
 	
 		
