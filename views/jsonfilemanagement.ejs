@@ -52,7 +52,7 @@ $(document).ready(function(){
 
 <table width="100%" >
 		<tr>
-		<h2>Json File Management</h2>
+		<h2 style="color:#0D4F8B;">Json File Management</h2>
 		</br>
 		<form name="jasonFileManagementForm" action="/jsonfile" method="post">
 		<input type="hidden" id ="marketId" name="marketId" value="">
@@ -60,10 +60,10 @@ $(document).ready(function(){
 		<tr>
 		
 		<tr><td >
-			<p style="color:#0000ff;" align="left"  >
+			<p style="color:#000000;" align="left"  >
 						Select Market Names
 			</p></td>
-			<td><p style="color:#0000ff;">
+			<td><p style="color:#000000;">
 						<select name="selectedMarketNames" id ="selectedMarketNames"> 
 						<option value="">-- Select --</option>
 						<% for(var i=0; i<abc.item2.length; i++) {%>
@@ -74,7 +74,7 @@ $(document).ready(function(){
 			
 		<tr height="20px" width="100px" align="left"></tr>	
 			<tr><td style="width: 200px;" >							
-					    	<span style="color:#0000ff;">MotoService Market Name </span>
+					    	<span style="color:#000000;">MotoService Market Name </span>
 				</td>
 				<td style="color:#0000ff;">
 					    	<input id ="marketName" name="marketName" type="text" value=""><span id="marketNameError" style="color='display ='none'"> </span>
@@ -84,7 +84,7 @@ $(document).ready(function(){
 		
 		<tr align="left">
 			<td style="width: 200px;">
-							<span style="color:#0000ff;"> File Name  </span>
+							<span style="color:#000000;"> File Name  </span>
 			</td>
 			<td style="color:#0000ff;">
 							<input id="fileNamevalue" value = "<%= abc.item3[0] %>" type="hidden"/>
@@ -95,7 +95,7 @@ $(document).ready(function(){
 			
 		<tr>
 			<td style="width: 200px;">
-							<span style="color:#0000ff;">File URL </span>
+							<span style="color:#000000;">File URL </span>
 			</td>
 			<td style="color:#0000ff;">
 							<input id="fileURLvalue" value = "<%= abc.item3[1] %>" type="hidden"/>
