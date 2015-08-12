@@ -8,8 +8,10 @@ RUN apt-get update
 # install nodejs and npm
 RUN apt-get install -y nodejs npm git git-core
 
-ADD start.sh /home/ubuntu/node-v0.10.29
+#ADD start.sh /home/ubuntu/node-v0.10.29
 
-RUN chmod +x /home/ubuntu/node-v0.10.29/start.sh
+#RUN chmod +x /home/ubuntu/node-v0.10.29/start.sh
 
-CMD ./home/ubuntu/node-v0.10.29/start.sh
+#CMD ./home/ubuntu/node-v0.10.29/start.sh
+
+CMD ["node", "/home/ubuntu/node-v0.12.7/motocitmigration/app.js"]
