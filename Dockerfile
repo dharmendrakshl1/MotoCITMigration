@@ -14,4 +14,4 @@ RUN apt-get install -y nodejs npm git git-core
 
 #CMD ./home/ubuntu/node-v0.10.29/start.sh
 
-CMD ["node", "/home/ubuntu/node-v0.12.7/motocitmigration/app.js"]
+CMD ["node", "/home/ubuntu/node-v0.12.7/motocitmigration/cluster.js"]
