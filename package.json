@@ -19,8 +19,7 @@
 	    "http": "*",
 	    "multipart": "*",
 	    "node-uuid": "*",
-	    "fileupload": "*",
-	    
+	    "fileupload": "*",	    
 	    "bcrypt-nodejs" : "latest",
 	    "connect-flash" : "~0.1.1",
 	    "passport-google-oauth" : "~0.1.5",
