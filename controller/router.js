@@ -5,6 +5,11 @@ var JsonFileManagement = require('../model/JsonFileManagement');
 
 module.exports = function (app, passport) {
 	
+	//New Routes
+	app.get('/newroute', function(req, res){
+		res.send('This is my new Route');
+	});
+	
 	// normal routes ==============================================================
     // show the home page (will also have our login links)
     app.get('/', function(req, res) {
