@@ -7,7 +7,7 @@ module.exports = function (app, passport) {
 	
 	//New Routes
 	app.get('/newroute', function(req, res){
-		res.send('This is my new Route');
+		res.send('<h1>This is my new Route</h1>');
 	});
 	
 	// normal routes ==============================================================
